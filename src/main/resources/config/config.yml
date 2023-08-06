@@ -1,0 +1,3 @@
+send-death-location:
+  enabled: true
+  message: "&e[Death Tracker] &fYou've just died at %d %d %d"

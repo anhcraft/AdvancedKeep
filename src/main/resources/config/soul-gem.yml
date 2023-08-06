@@ -1,0 +1,14 @@
+# The soul gem item
+item:
+  material: EMERALD
+  name: "&6&lSoul &a&lGem"
+  lore:
+    - "&fSave your items on death!"
+  enchant:
+    durability: 1
+  flag:
+    - hide_enchants
+
+# The name of the NBT tag to determine an item is the soul gem
+# Do not change this if your players have already used any soul gems
+nbt-tag: "soulgem"

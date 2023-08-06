@@ -6,66 +6,91 @@
 
     <groupId>dev.anhcraft</groupId>
     <artifactId>advancedkeep</artifactId>
-    <version>1.5.6</version>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>common</module>
-        <module>legacy</module>
-    </modules>
+    <version>2.0.0</version>
+    <packaging>jar</packaging>
 
     <name>AdvancedKeep</name>
 
     <description>Advanced plugin for keeping players items and exp</description>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
     </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <relocations>
+                                <relocation>
+                                    <pattern>dev.anhcraft.config</pattern>
+                                    <shadedPattern>dev.anhcraft.advancedkeep.lib.config</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>dev.anhcraft.jvmkit</pattern>
+                                    <shadedPattern>dev.anhcraft.advancedkeep.lib.jvmkit</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>co.aikar.commands</pattern>
+                                    <shadedPattern>dev.anhcraft.advancedkeep.lib.acf</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>co.aikar.locales</pattern>
+                                    <shadedPattern>dev.anhcraft.advancedkeep.lib.locales</shadedPattern>
+                                </relocation>
+                            </relocations>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
 
     <repositories>
         <repository>
-            <id>mcvn-repo</id>
-            <url>https://repo.minecraftvn.net/repository/maven-public/</url>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
         </repository>
         <repository>
             <id>spigotmc-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
         </repository>
         <repository>
-            <id>sk89q-repo</id>
-            <url>https://maven.sk89q.com/repo/</url>
-        </repository>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-        <repository>
-            <id>CodeMC</id>
-            <url>https://repo.codemc.org/repository/maven-public</url>
-        </repository>
-        <repository>
-            <id>github</id>
-            <url>https://maven.pkg.github.com/TownyAdvanced/Towny</url>
+            <id>aikar</id>
+            <url>https://repo.aikar.co/content/groups/aikar/</url>
         </repository>
     </repositories>
 
-    <distributionManagement>
-        <repository>
-            <id>nexus</id>
-            <url>https://repo.anhcraft.dev/repository/mvn/</url>
-        </repository>
-    </distributionManagement>
-
     <dependencies>
         <dependency>
-            <groupId>com.github.Angeschossen</groupId>
-            <artifactId>LandsAPI</artifactId>
-            <version>4.8.6</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>dev.anhcraft</groupId>
-            <artifactId>craftkit.spigot</artifactId>
-            <version>1.2.0</version>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+            <version>1.14.4-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -75,16 +100,22 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.SaberLLC</groupId>
-            <artifactId>Saber-Factions</artifactId>
-            <version>2.4.1</version>
-            <scope>provided</scope>
+            <groupId>com.github.anhcraft.config</groupId>
+            <artifactId>config.bukkit</artifactId>
+            <version>v1.1.7</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.palmergames.bukkit.towny</groupId>
-            <artifactId>Towny</artifactId>
-            <version>0.96.2.9</version>
-            <scope>provided</scope>
+            <groupId>com.github.anhcraft</groupId>
+            <artifactId>JvmKit</artifactId>
+            <version>v1.1.5</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>co.aikar</groupId>
+            <artifactId>acf-paper</artifactId>
+            <version>0.5.1-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>

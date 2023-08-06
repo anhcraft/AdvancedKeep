@@ -1,0 +1,29 @@
+survival:
+  day:
+    time: "0:12516"
+    keep-item: 1
+    keep-exp: 1
+    broadcast:
+      - "&a&lA new day starts! Items and exp are protected on death."
+    sound: "ITEM_GOAT_HORN_SOUND_0"
+    action-bar: "&a&lA new day starts! Items and exp are protected on death."
+
+  night:
+    time: "12516:24000"
+    keep-item: 0.5
+    keep-exp: 0.5
+    broadcast:
+      - "&a&lNight time! Items and exp are no longer protected on death."
+    sound: "ITEM_GOAT_HORN_SOUND_0"
+    action-bar: "&a&lNight time! Items and exp are no longer protected on death."
+
+  night-vip:
+    time: "12516:24000"
+    permission: "keep.vip"
+    keep-item: 1
+    keep-exp: 0.5
+
+world_nether:
+  default:
+    keep-item: 0
+    keep-exp: 0
