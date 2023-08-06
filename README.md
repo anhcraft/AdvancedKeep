@@ -1,2 +1,3 @@
-# KeepMyLife
-Advanced plugin for keeping players inventory
+# Advanced Keep
+
+Control item and exp keep.
