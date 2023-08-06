@@ -6,6 +6,7 @@ import dev.anhcraft.advancedkeep.cmd.MainCommand;
 import dev.anhcraft.advancedkeep.config.MainConfig;
 import dev.anhcraft.advancedkeep.config.SoulGemConfig;
 import dev.anhcraft.advancedkeep.config.WorldConfig;
+import dev.anhcraft.advancedkeep.integration.IntegrationManager;
 import dev.anhcraft.advancedkeep.listener.EventListener;
 import dev.anhcraft.advancedkeep.task.WorldTimeChangeTask;
 import dev.anhcraft.advancedkeep.util.ConfigHelper;
@@ -29,6 +30,7 @@ public final class AdvancedKeep extends JavaPlugin {
     public Map<String, List<WorldConfig>> worlds = new HashMap<>();
     private NamespacedKey SOUL_GEM_KEY;
     public boolean debug;
+    public IntegrationManager integrationManager;
 
     @Override
     public void onEnable() {
@@ -39,6 +41,8 @@ public final class AdvancedKeep extends JavaPlugin {
         PaperCommandManager pcm = new PaperCommandManager(this);
         pcm.enableUnstableAPI("help");
         pcm.registerCommand(new MainCommand(this));
+
+        integrationManager = new IntegrationManager(this);
     }
 
     @Override

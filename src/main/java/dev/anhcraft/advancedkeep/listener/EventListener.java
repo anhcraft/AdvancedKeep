@@ -2,6 +2,8 @@ package dev.anhcraft.advancedkeep.listener;
 
 import dev.anhcraft.advancedkeep.AdvancedKeep;
 import dev.anhcraft.advancedkeep.config.WorldConfig;
+import dev.anhcraft.advancedkeep.integration.ClaimStatus;
+import dev.anhcraft.advancedkeep.integration.KeepRatio;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -50,6 +52,26 @@ public class EventListener implements Listener {
         double keepItemRatio = event.getKeepInventory() ? 1 : 0;
         double keepExpRatio = event.getKeepLevel() ? 1 : 0;
 
+        if (p.hasPermission("keep.item")) {
+            keepItemRatio = 1;
+            if (plugin.debug) {
+                plugin.getLogger().info(String.format(
+                        "[Debug#%s] Keep item guaranteed",
+                        p.getName()
+                ));
+            }
+        }
+
+        if (p.hasPermission("keep.exp")) {
+            keepExpRatio = 1;
+            if (plugin.debug) {
+                plugin.getLogger().info(String.format(
+                        "[Debug#%s] Keep exp guaranteed",
+                        p.getName()
+                ));
+            }
+        }
+
         World w = p.getWorld();
         List<WorldConfig> wg = plugin.worlds.get(w.getName());
         if(wg != null) {
@@ -69,24 +91,13 @@ public class EventListener implements Listener {
             }
         }
 
-        if (p.hasPermission("keep.item")) {
-            keepItemRatio = 1;
-            if (plugin.debug) {
-                plugin.getLogger().info(String.format(
-                        "[Debug#%s] Keep item guaranteed",
-                        p.getName()
-                ));
-            }
-        }
-        if (p.hasPermission("keep.exp")) {
-            keepExpRatio = 1;
-            if (plugin.debug) {
-                plugin.getLogger().info(String.format(
-                        "[Debug#%s] Keep exp guaranteed",
-                        p.getName()
-                ));
-            }
-        }
+        KeepRatio keepRatio = plugin.integrationManager.getStateAggregator().getKeepRatio(location, p);
+        keepItemRatio = Math.max(keepItemRatio, keepRatio.item());
+        keepExpRatio = Math.max(keepExpRatio, keepRatio.exp());
+
+        ClaimStatus claimStatus = plugin.integrationManager.getClaimAggregator().getClaimStatus(location, p);
+        keepItemRatio = Math.max(keepItemRatio, plugin.mainConfig.claimKeepItemRatio.getOrDefault(claimStatus, 0d));
+        keepExpRatio = Math.max(keepExpRatio, plugin.mainConfig.claimKeepExpRatio.getOrDefault(claimStatus, 0d));
 
         if (Math.abs(keepItemRatio - 1.0) < 0.01 && Math.abs(keepExpRatio - 1.0) < 0.01) {
             event.setKeepInventory(true);
