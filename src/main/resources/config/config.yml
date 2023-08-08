@@ -9,6 +9,3 @@ claim-keep-exp-ratio:
   WILD: 0.0
   UNTRUSTED: 0.0
   TRUSTED: 1.0
-integration:
-  Lands: true
-  WorldGuard: true

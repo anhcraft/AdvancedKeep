@@ -33,6 +33,11 @@ public final class AdvancedKeep extends JavaPlugin {
     public IntegrationManager integrationManager;
 
     @Override
+    public void onLoad() {
+        integrationManager = new IntegrationManager(this);
+    }
+
+    @Override
     public void onEnable() {
         reload();
 
@@ -41,8 +46,6 @@ public final class AdvancedKeep extends JavaPlugin {
         PaperCommandManager pcm = new PaperCommandManager(this);
         pcm.enableUnstableAPI("help");
         pcm.registerCommand(new MainCommand(this));
-
-        integrationManager = new IntegrationManager(this);
     }
 
     @Override

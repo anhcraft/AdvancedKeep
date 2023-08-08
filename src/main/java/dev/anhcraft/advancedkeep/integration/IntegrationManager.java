@@ -3,7 +3,6 @@ package dev.anhcraft.advancedkeep.integration;
 import dev.anhcraft.advancedkeep.AdvancedKeep;
 import dev.anhcraft.advancedkeep.integration.bridge.LandsBridge;
 import dev.anhcraft.advancedkeep.integration.bridge.WorldGuardBridge;
-import dev.anhcraft.config.utils.ObjectUtil;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -28,8 +27,7 @@ public class IntegrationManager {
     }
 
     private void tryHook(String plugin, Class<? extends Integration> clazz) {
-        if (mainPlugin.mainConfig.integration.getOrDefault(plugin, true) &&
-                mainPlugin.getServer().getPluginManager().isPluginEnabled(plugin)) {
+        if (mainPlugin.getServer().getPluginManager().getPlugin(plugin) != null) {
             Object instance = null;
             for (Constructor<?> constructor : clazz.getDeclaredConstructors()) {
                 if (constructor.getParameterCount() == 1) {
@@ -40,14 +38,18 @@ public class IntegrationManager {
                              InvocationTargetException e) {
                         throw new RuntimeException(e);
                     }
+                } else if (constructor.getParameterCount() == 0) {
+                    try {
+                        instance = constructor.newInstance();
+                        break;
+                    } catch (InstantiationException | IllegalAccessException |
+                             InvocationTargetException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
             if (instance == null) {
-                try {
-                    instance = ObjectUtil.newInstance(clazz);
-                } catch (InstantiationException e) {
-                    throw new RuntimeException(e);
-                }
+                throw new RuntimeException("Failed to create instance of " + clazz);
             }
             integrationMap.put(plugin, (Integration) instance);
             this.mainPlugin.getLogger().info("[Integration] Hooked to " + plugin);

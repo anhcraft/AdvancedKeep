@@ -22,7 +22,4 @@ public class MainConfig {
 
     @Validation(notNull = true, silent = true)
     public Map<ClaimStatus, Double> claimKeepExpRatio = Collections.emptyMap();
-
-    @Validation(notNull = true, silent = true)
-    public Map<String, Boolean> integration = Collections.emptyMap();
 }
