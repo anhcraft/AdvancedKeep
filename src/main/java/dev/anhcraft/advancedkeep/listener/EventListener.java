@@ -40,6 +40,8 @@ public class EventListener implements Listener {
         }
 
         if (event.getKeepInventory() && event.getKeepLevel()) {
+            event.setDroppedExp(0);
+            event.getDrops().clear();
             if (plugin.debug) {
                 plugin.getLogger().info(String.format(
                         "[Debug#%s] Already kept all - Skipped",
@@ -103,6 +105,7 @@ public class EventListener implements Listener {
             event.setKeepInventory(true);
             event.getDrops().clear();
             event.setKeepLevel(true);
+            event.setDroppedExp(0);
             if (plugin.debug) {
                 plugin.getLogger().info(String.format(
                         "[Debug#%s] 100%% kept all items & exp",
@@ -131,6 +134,7 @@ public class EventListener implements Listener {
             event.setKeepInventory(true);
             event.getDrops().clear();
             event.setKeepLevel(true);
+            event.setDroppedExp(0);
             if (plugin.debug) {
                 plugin.getLogger().info(String.format(
                         "[Debug#%s] Kept all items & exp due to soul gem",
