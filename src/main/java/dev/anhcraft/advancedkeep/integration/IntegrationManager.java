@@ -40,6 +40,14 @@ public class IntegrationManager {
                              InvocationTargetException e) {
                         throw new RuntimeException(e);
                     }
+                } else if (constructor.getParameterCount() == 0) {
+                    try {
+                        instance = constructor.newInstance();
+                        break;
+                    } catch (InstantiationException | IllegalAccessException |
+                             InvocationTargetException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
             if (instance == null) {
