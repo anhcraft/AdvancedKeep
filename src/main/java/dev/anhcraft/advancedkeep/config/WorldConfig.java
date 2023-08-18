@@ -11,8 +11,8 @@ import org.jetbrains.annotations.Nullable;
 public class WorldConfig {
     @Nullable
     public Duration time;
-    public double keepItem;
-    public double keepExp;
+    public boolean keepItem;
+    public boolean keepExp;
     @Nullable
     public String permission;
     @Nullable
@@ -23,8 +23,6 @@ public class WorldConfig {
 
     @PostHandler
     private void handle() {
-        keepExp = Math.min(Math.max(keepExp, 0), 1);
-        keepItem = Math.min(Math.max(keepItem, 0), 1);
         if (broadcast != null) {
             for (int i = 0; i < broadcast.length; i++) {
                 if (broadcast[i] != null)

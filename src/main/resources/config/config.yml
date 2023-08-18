@@ -1,11 +1,11 @@
 send-death-location:
   enabled: true
   message: "&e[Death Tracker] &fYou've just died at %d %d %d"
-claim-keep-item-ratio:
-  WILD: 0.0
-  UNTRUSTED: 0.0
-  TRUSTED: 1.0
-claim-keep-exp-ratio:
-  WILD: 0.0
-  UNTRUSTED: 0.0
-  TRUSTED: 1.0
+claim-keep-item:
+  WILD: false
+  UNTRUSTED: false
+  TRUSTED: true
+claim-keep-exp:
+  WILD: false
+  UNTRUSTED: false
+  TRUSTED: true

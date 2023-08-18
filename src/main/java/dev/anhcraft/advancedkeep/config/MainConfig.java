@@ -18,8 +18,8 @@ public class MainConfig {
     public String sendDeathLocationMessage;
 
     @Validation(notNull = true, silent = true)
-    public Map<ClaimStatus, Double> claimKeepItemRatio = Collections.emptyMap();
+    public Map<ClaimStatus, Boolean> claimKeepItem = Collections.emptyMap();
 
     @Validation(notNull = true, silent = true)
-    public Map<ClaimStatus, Double> claimKeepExpRatio = Collections.emptyMap();
+    public Map<ClaimStatus, Boolean> claimKeepExp = Collections.emptyMap();
 }
