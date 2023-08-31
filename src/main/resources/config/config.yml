@@ -2,7 +2,7 @@
 # Requires permission: keep.death-tracker
 death-tracker:
   enabled: true
-  message: "&e[Death Tracker] &fYou've just died at %d %d %d"
+  message: "&e[Death Tracker] &fYou've just died at {world} {x} {y} {z}"
 
 # For integration with other claim plugins, you can specify the behaviour of keeping items
 claim-keep-item:

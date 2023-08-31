@@ -30,10 +30,12 @@ public class EventListener implements Listener {
         Location location = p.getLocation();
 
         if (plugin.mainConfig.deathTrackerEnabled && p.hasPermission("keep.death-tracker")) {
-            p.sendMessage(ChatColor.translateAlternateColorCodes('&', String.format(
-                plugin.mainConfig.deathTrackerMessage,
-                location.getBlockX(), location.getBlockY(), location.getBlockZ()
-            )));
+            p.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.mainConfig.deathTrackerMessage
+                    .replace("{world}", location.getWorld().getName())
+                    .replace("{x}", String.valueOf(location.getBlockX()))
+                    .replace("{y}", String.valueOf(location.getBlockY()))
+                    .replace("{z}", String.valueOf(location.getBlockZ()))
+            ));
         }
 
         if (event.getKeepInventory() && event.getKeepLevel()) {
