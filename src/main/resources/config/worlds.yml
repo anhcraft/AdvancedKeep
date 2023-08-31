@@ -27,6 +27,19 @@ survival:
     sound: "ITEM_GOAT_HORN_SOUND_0"
     action-bar: "&a&lNight time! Items and exp are no longer protected on death."
 
+  # By convention, the plugin checks from bottom to top
+  # So this timeframe will be checked first!
+  night-vip:
+    time: "12516:24000"
+    keep-item: true
+    keep-exp: true
+    # You can specify permission requirement for this timeframe
+    permission: "keep.timed.survival.night"
+    broadcast:
+      - "&a&lNight time! Items and exp are no longer protected on death."
+    sound: "ITEM_GOAT_HORN_SOUND_0"
+    action-bar: "&a&lNight time! Items and exp are no longer protected on death."
+
 world_nether:
   default:
     #time: "0:24000" # remove the time option to disable time-based keep
