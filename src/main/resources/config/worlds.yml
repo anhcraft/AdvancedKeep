@@ -1,8 +1,18 @@
+# Write down your world name here
 survival:
-  day:
+  # The plugin allows you to specify timeframes to control keeps based on time
+  # However, you can disable this by looking at below configuration
+  day: # Name this whatever you want
+    # This option is required for time-based keep
+    # Format: <starting in-game ticks>:<ending in-game ticks>
+    # Remove this option to let this timeframe work all time
     time: "0:12516"
+
+    # During this time, keep item/exp?
     keep-item: true
     keep-exp: true
+
+    # Broadcast, sound and action bar to send to all players on that world when this timeframe starts
     broadcast:
       - "&a&lA new day starts! Items and exp are protected on death."
     sound: "ITEM_GOAT_HORN_SOUND_0"
@@ -19,5 +29,6 @@ survival:
 
 world_nether:
   default:
+    #time: "0:24000" # remove the time option to disable time-based keep
     keep-item: false
     keep-exp: false

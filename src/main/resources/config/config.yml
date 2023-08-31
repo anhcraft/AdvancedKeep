@@ -1,11 +1,26 @@
-send-death-location:
+# Death Tracker is a feature to report death location
+# Requires permission: keep.death-tracker
+death-tracker:
   enabled: true
   message: "&e[Death Tracker] &fYou've just died at %d %d %d"
+
+# For integration with other claim plugins, you can specify the behaviour of keeping items
 claim-keep-item:
+  # By default, no keep on wilderness
   WILD: false
+  # By default, no keep on untrusted claims
   UNTRUSTED: false
+  # By default, keep on trusted claims
   TRUSTED: true
+
+# For integration with other claim plugins, you can specify the behaviour of keeping exp
 claim-keep-exp:
   WILD: false
   UNTRUSTED: false
   TRUSTED: true
+
+# How frequent to check the time for time-based keep
+# You can increase the interval for better performance
+# If you do not use timed-based keep, set this to a really high value
+# The value is in ticks. 1 second equals to 20 ticks.
+time-check-interval: 20

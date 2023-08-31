@@ -10,16 +10,18 @@ import java.util.Map;
 
 @Configurable(keyNamingStyle = Configurable.NamingStyle.TRAIN_CASE)
 public class MainConfig {
-    @Path("send-death-location.enabled")
-    public boolean sendDeathLocationEnabled;
+    @Path("death-tracker.enabled")
+    public boolean deathTrackerEnabled;
 
-    @Path("send-death-location.message")
+    @Path("death-tracker.message")
     @Validation(notNull = true)
-    public String sendDeathLocationMessage;
+    public String deathTrackerMessage;
 
     @Validation(notNull = true, silent = true)
     public Map<ClaimStatus, Boolean> claimKeepItem = Collections.emptyMap();
 
     @Validation(notNull = true, silent = true)
     public Map<ClaimStatus, Boolean> claimKeepExp = Collections.emptyMap();
+
+    public long timeCheckInterval;
 }

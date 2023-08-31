@@ -90,7 +90,7 @@ public final class AdvancedKeep extends JavaPlugin {
 
         SOUL_GEM_KEY = new NamespacedKey(this, soulGemConfig.nbtTag);
 
-        new WorldTimeChangeTask(this).runTaskTimerAsynchronously(this, 0L, 20L);
+        new WorldTimeChangeTask(this).runTaskTimerAsynchronously(this, 0L, mainConfig.timeCheckInterval);
     }
 
     public YamlConfiguration requestConfig(String path) {

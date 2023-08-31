@@ -29,9 +29,9 @@ public class EventListener implements Listener {
         Player p = event.getEntity();
         Location location = p.getLocation();
 
-        if (plugin.mainConfig.sendDeathLocationEnabled && p.hasPermission("keep.death-location")) {
+        if (plugin.mainConfig.deathTrackerEnabled && p.hasPermission("keep.death-tracker")) {
             p.sendMessage(ChatColor.translateAlternateColorCodes('&', String.format(
-                plugin.mainConfig.sendDeathLocationMessage,
+                plugin.mainConfig.deathTrackerMessage,
                 location.getBlockX(), location.getBlockY(), location.getBlockZ()
             )));
         }
