@@ -4,7 +4,7 @@ import dev.anhcraft.advancedkeep.AdvancedKeep;
 import dev.anhcraft.advancedkeep.config.WorldConfig;
 import dev.anhcraft.advancedkeep.integration.ClaimStatus;
 import dev.anhcraft.advancedkeep.integration.KeepStatus;
-import org.bukkit.ChatColor;
+import dev.anhcraft.config.bukkit.utils.ColorUtil;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -30,7 +30,7 @@ public class EventListener implements Listener {
         Location location = p.getLocation();
 
         if (plugin.mainConfig.deathTrackerEnabled && p.hasPermission("keep.death-tracker")) {
-            p.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.mainConfig.deathTrackerMessage
+            p.sendMessage(ColorUtil.colorize(plugin.mainConfig.deathTrackerMessage
                     .replace("{world}", location.getWorld().getName())
                     .replace("{x}", String.valueOf(location.getBlockX()))
                     .replace("{y}", String.valueOf(location.getBlockY()))
