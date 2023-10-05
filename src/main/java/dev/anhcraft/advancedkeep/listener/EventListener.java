@@ -1,6 +1,7 @@
 package dev.anhcraft.advancedkeep.listener;
 
 import dev.anhcraft.advancedkeep.AdvancedKeep;
+import dev.anhcraft.advancedkeep.api.PlayerKeepEvent;
 import dev.anhcraft.advancedkeep.config.WorldConfig;
 import dev.anhcraft.advancedkeep.integration.ClaimStatus;
 import dev.anhcraft.advancedkeep.integration.KeepStatus;
@@ -14,6 +15,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class EventListener implements Listener {
@@ -50,11 +53,11 @@ public class EventListener implements Listener {
             return;
         }
 
-        boolean keepItem = event.getKeepInventory();
+        boolean keepInventory = event.getKeepInventory();
         boolean keepExp = event.getKeepLevel();
 
         if (p.hasPermission("keep.item")) {
-            keepItem = true;
+            keepInventory = true;
             if (plugin.debug) {
                 plugin.getLogger().info(String.format(
                         "[Debug#%s] Keep item guaranteed",
@@ -80,12 +83,12 @@ public class EventListener implements Listener {
                 long time = w.getTime();
                 if ((config.time == null || (time >= config.time.getBegin() && time <= config.time.getEnd())) &&
                         (config.permission == null || p.hasPermission(config.permission))) {
-                    if (config.keepItem) keepItem = true;
+                    if (config.keepItem) keepInventory = true;
                     if (config.keepExp) keepExp = true;
                     if (plugin.debug) {
                         plugin.getLogger().info(String.format(
                                 "[Debug#%s] Pre-check: Keep item = %b, keep exp = %b",
-                                p.getName(), keepItem, keepExp
+                                p.getName(), keepInventory, keepExp
                         ));
                     }
                 }
@@ -93,14 +96,14 @@ public class EventListener implements Listener {
         }
 
         KeepStatus keepRatio = plugin.integrationManager.getStateAggregator().getKeepRatio(location, p);
-        if (keepRatio.item()) keepItem = true;
+        if (keepRatio.item()) keepInventory = true;
         if (keepRatio.exp()) keepExp = true;
 
         ClaimStatus claimStatus = plugin.integrationManager.getClaimAggregator().getClaimStatus(location, p);
-        if (plugin.mainConfig.claimKeepItem.getOrDefault(claimStatus, false)) keepItem = true;
+        if (plugin.mainConfig.claimKeepItem.getOrDefault(claimStatus, false)) keepInventory = true;
         if (plugin.mainConfig.claimKeepExp.getOrDefault(claimStatus, false)) keepExp = true;
 
-        if (keepItem && keepExp) {
+        if (keepInventory && keepExp) {
             event.setKeepInventory(true);
             event.getDrops().clear();
             event.setKeepLevel(true);
@@ -146,7 +149,17 @@ public class EventListener implements Listener {
         event.setKeepInventory(true);
         event.getDrops().clear(); // 1.14.4 fix
 
-        if (keepItem) {
+        List<ItemStack> toDropItems = new ArrayList<>(Arrays.asList(items));
+        List<ItemStack> toKeepItems = new ArrayList<>();
+
+        PlayerKeepEvent keepEvent = new PlayerKeepEvent(p, keepInventory, toDropItems, toKeepItems, keepExp);
+        plugin.getServer().getPluginManager().callEvent(keepEvent);
+        toDropItems = keepEvent.getDropItems();
+        toKeepItems = keepEvent.getKeepItems();
+        keepInventory = keepEvent.shouldKeepInventory();
+        keepExp = keepEvent.shouldKeepExp();
+
+        if (keepInventory) {
             if (plugin.debug) {
                 plugin.getLogger().info(String.format(
                         "[Debug#%s] 100%% Keep Item | Kept all items",
@@ -154,13 +167,13 @@ public class EventListener implements Listener {
                 ));
             }
         } else {
-            for (ItemStack item : items) {
+            for (ItemStack item : toDropItems) {
                 if (isPresent(item)) {
                     p.getWorld().dropItemNaturally(location, item);
                 }
             }
 
-            p.getInventory().setContents(new ItemStack[]{});
+            p.getInventory().setContents(toKeepItems.toArray(new ItemStack[0]));
 
             if (plugin.debug) {
                 plugin.getLogger().info(String.format("[Debug#%s] Dropped all items", p.getName()));
