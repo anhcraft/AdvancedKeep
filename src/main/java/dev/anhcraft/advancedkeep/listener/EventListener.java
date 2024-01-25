@@ -95,7 +95,7 @@ public class EventListener implements Listener {
             }
         }
 
-        KeepStatus keepRatio = plugin.integrationManager.getStateAggregator().getKeepRatio(location, p);
+        KeepStatus keepRatio = plugin.integrationManager.getStateAggregator().getKeepStatus(location, p);
         if (keepRatio.item()) keepInventory = true;
         if (keepRatio.exp()) keepExp = true;
 

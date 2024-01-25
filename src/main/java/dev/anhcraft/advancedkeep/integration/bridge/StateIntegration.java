@@ -9,5 +9,5 @@ import org.jetbrains.annotations.Nullable;
 
 public interface StateIntegration extends Integration {
     @NotNull
-    KeepStatus getKeepRatio(@NotNull Location location, @Nullable Player player);
+    KeepStatus getKeepStatus(@NotNull Location location, @Nullable Player player);
 }

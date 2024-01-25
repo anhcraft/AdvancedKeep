@@ -14,13 +14,13 @@ public class StateAggregator implements StateIntegration {
     }
 
     @Override
-    public @NotNull KeepStatus getKeepRatio(@NotNull Location location, @Nullable Player player) {
+    public @NotNull KeepStatus getKeepStatus(@NotNull Location location, @Nullable Player player) {
         boolean item = false;
         boolean exp = false;
         for (Integration i : integrationManager.getIntegrations()) {
             if (i instanceof StateIntegration) {
-                if (((StateIntegration) i).getKeepRatio(location, player).item()) item = true;
-                if (((StateIntegration) i).getKeepRatio(location, player).exp()) exp = true;
+                if (((StateIntegration) i).getKeepStatus(location, player).item()) item = true;
+                if (((StateIntegration) i).getKeepStatus(location, player).exp()) exp = true;
             }
         }
         return new KeepStatus(item, exp);

@@ -23,7 +23,7 @@ public class WorldGuardBridge implements StateIntegration {
     }
 
     @Override
-    public @NotNull KeepStatus getKeepRatio(@NotNull Location location, @Nullable Player player) {
+    public @NotNull KeepStatus getKeepStatus(@NotNull Location location, @Nullable Player player) {
         ApplicableRegionSet applicableRegions = WorldGuard.getInstance().getPlatform().getRegionContainer()
                 .createQuery()
                 .getApplicableRegions(BukkitAdapter.adapt(location));
