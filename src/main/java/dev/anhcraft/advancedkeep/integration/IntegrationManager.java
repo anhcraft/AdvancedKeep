@@ -1,6 +1,7 @@
 package dev.anhcraft.advancedkeep.integration;
 
 import dev.anhcraft.advancedkeep.AdvancedKeep;
+import dev.anhcraft.advancedkeep.integration.bridge.GriefPreventionBridge;
 import dev.anhcraft.advancedkeep.integration.bridge.LandsBridge;
 import dev.anhcraft.advancedkeep.integration.bridge.WorldGuardBridge;
 
@@ -21,6 +22,7 @@ public class IntegrationManager {
 
         tryHook("Lands", LandsBridge.class);
         tryHook("WorldGuard", WorldGuardBridge.class);
+        tryHook("GriefPrevention", GriefPreventionBridge.class);
 
         claimAggregator = new ClaimAggregator(this);
         stateAggregator = new StateAggregator(this);

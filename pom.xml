@@ -134,5 +134,11 @@
             <version>6.33.10</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.github.TechFortress</groupId>
+            <artifactId>GriefPrevention</artifactId>
+            <version>17.0.0</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 </project>
