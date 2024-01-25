@@ -14,10 +14,10 @@ Control player item and exp keep
 
 ## Download
 
-- Spigot: https://spigotmc.org/resources/advancedkeep.112395/
+- Spigot: https://spigotmc.org/resources/advancedkeep.112395
 - Polymart: https://polymart.org/resource/advancedkeep.4824
-- BuiltByBit: 
-- Modrinth: 
+- BuiltByBit: https://builtbybit.com/resources/advancedkeep.38320
+- Modrinth: https://modrinth.com/plugin/advancedkeep
 
 ## Community
 
