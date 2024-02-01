@@ -6,7 +6,7 @@ Control player item and exp keep
 - Per-world configuration
 - Permission keep
 - Time-based keep
-- Integration with claim plugins: GriefPrevention, Lands
+- Integration with claim plugins: GriefPrevention, Lands, Towny, SaberFactions
 - WorldGuard flags: keep-item and keep-exp
 - Death tracker: Obtain your death location
 - Soul Gem: Put in inventory to keep both item and exp
