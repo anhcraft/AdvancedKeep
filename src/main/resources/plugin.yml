@@ -2,7 +2,7 @@ name: AdvancedKeep
 version: ${project.version}
 main: dev.anhcraft.advancedkeep.AdvancedKeep
 authors: [anhcraft]
-softdepend: [WorldEdit,WorldGuard,Lands,Towny,GriefPrevention]
+softdepend: [WorldEdit,WorldGuard,Lands,Towny,GriefPrevention,Factions]
 description: ${project.description}
 website: https://anhcraft.dev/
 api-version: "1.13"

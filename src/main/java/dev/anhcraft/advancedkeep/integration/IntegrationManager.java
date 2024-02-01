@@ -1,10 +1,7 @@
 package dev.anhcraft.advancedkeep.integration;
 
 import dev.anhcraft.advancedkeep.AdvancedKeep;
-import dev.anhcraft.advancedkeep.integration.bridge.GriefPreventionBridge;
-import dev.anhcraft.advancedkeep.integration.bridge.LandsBridge;
-import dev.anhcraft.advancedkeep.integration.bridge.TownyBridge;
-import dev.anhcraft.advancedkeep.integration.bridge.WorldGuardBridge;
+import dev.anhcraft.advancedkeep.integration.bridge.*;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -25,6 +22,7 @@ public class IntegrationManager {
         tryHook("WorldGuard", WorldGuardBridge.class);
         tryHook("GriefPrevention", GriefPreventionBridge.class);
         tryHook("Towny", TownyBridge.class);
+        tryHook("Factions", FactionsBridge.class);
 
         claimAggregator = new ClaimAggregator(this);
         stateAggregator = new StateAggregator(this);
