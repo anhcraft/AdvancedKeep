@@ -1,4 +1,5 @@
 # AdvancedKeep
+[![](https://jitpack.io/v/anhcraft/AdvancedKeep.svg)](https://jitpack.io/#anhcraft/AdvancedKeep)
 
 Control player item and exp keep
 
@@ -18,10 +19,26 @@ Control player item and exp keep
 - Polymart: https://polymart.org/resource/advancedkeep.4824
 - BuiltByBit: https://builtbybit.com/resources/advancedkeep.38320
 - Modrinth: https://modrinth.com/plugin/advancedkeep
+- Hangar: https://hangar.papermc.io/anhcraft/AdvancedKeep
 
 ## Community
 
 Join my support server: https://discord.gg/HRAEKapRwx
+
+## API
+
+```xml
+<repository>
+  <id>jitpack.io</id>
+  <url>https://jitpack.io</url>
+</repository>
+
+<dependency>
+  <groupId>com.github.anhcraft.AdvancedKeep</groupId>
+  <artifactId>advancedkeep-api</artifactId>
+  <version>v...</version>
+</dependency>
+```
 
 ## License
 
