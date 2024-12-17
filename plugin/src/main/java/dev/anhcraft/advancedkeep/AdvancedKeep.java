@@ -2,6 +2,7 @@ package dev.anhcraft.advancedkeep;
 
 import co.aikar.commands.PaperCommandManager;
 import com.google.common.base.Preconditions;
+import dev.anhcraft.advancedkeep.api.ApiProvider;
 import dev.anhcraft.advancedkeep.cmd.MainCommand;
 import dev.anhcraft.advancedkeep.config.MainConfig;
 import dev.anhcraft.advancedkeep.config.SoulGemConfig;
@@ -12,6 +13,7 @@ import dev.anhcraft.advancedkeep.task.WorldTimeChangeTask;
 import dev.anhcraft.advancedkeep.util.ConfigHelper;
 import dev.anhcraft.jvmkit.utils.FileUtil;
 import dev.anhcraft.jvmkit.utils.IOUtil;
+import dev.anhcraft.jvmkit.utils.ReflectionUtil;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -46,6 +48,8 @@ public final class AdvancedKeep extends JavaPlugin {
         PaperCommandManager pcm = new PaperCommandManager(this);
         pcm.enableUnstableAPI("help");
         pcm.registerCommand(new MainCommand(this));
+
+        ReflectionUtil.setDeclaredStaticField(ApiProvider.class, "api", new AdvancedKeepApiImpl(this));
     }
 
     @Override

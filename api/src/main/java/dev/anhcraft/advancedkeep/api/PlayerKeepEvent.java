@@ -8,6 +8,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+/**
+ * Called when a player being kept (either inventory or exp)
+ * @deprecated The event would be soon removed
+ */
+@Deprecated(forRemoval = true)
 public class PlayerKeepEvent extends PlayerEvent {
     private static final HandlerList handlers = new HandlerList();
 
