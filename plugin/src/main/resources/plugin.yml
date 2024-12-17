@@ -5,4 +5,4 @@ authors: [anhcraft]
 softdepend: [WorldEdit,WorldGuard,Lands,Towny,GriefPrevention,Factions]
 description: ${project.description}
 website: https://anhcraft.dev/
-api-version: "1.13"
+api-version: "1.14"
